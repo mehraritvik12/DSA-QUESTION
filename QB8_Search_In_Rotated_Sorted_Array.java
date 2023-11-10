@@ -6,46 +6,51 @@ import java.util.Arrays;
 public class QB8_Search_In_Rotated_Sorted_Array {
 
 
-    public static  int search (ArrayList<Integer> arr, int n , int k) {
-        int start = 0;
-        int end = n - 1;
+    public static boolean searchInARotatedSortedArrayII(int []arr, int k) {
+        int n = arr.length; // size of the array.
+        int low = 0, high = n - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
 
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
+            //if mid points the target
+            if (arr[mid] == k) return true;
 
-            if (arr.get(mid) == k) {
-                return mid;
+            //Edge case:
+            if (arr[low] == arr[mid] && arr[mid] == arr[high]) {
+                low = low + 1;
+                high = high - 1;
+                continue;
             }
 
-//left sorted
-            if (arr.get(mid) >= arr.get(start)) {
-
-                if (arr.get(start) <= k && k <= arr.get(mid)) {
-
-                    end = mid - 1;
+            //if left part is sorted:
+            if (arr[low] <= arr[mid]) {
+                if (arr[low] <= k && k <= arr[mid]) {
+                    //element exists:
+                    high = mid - 1;
                 } else {
-                    start = mid + 1;
+                    //element does not exist:
+                    low = mid + 1;
                 }
-
-            } else {
-                if (arr.get(end) <= k && k <= arr.get(mid)) {
-                    start = mid + 1;
-
+            } else { //if right part is sorted:
+                if (arr[mid] <= k && k <= arr[high]) {
+                    //element exists:
+                    low = mid + 1;
+                } else {
+                    //element does not exist:
+                    high = mid - 1;
                 }
-                else{
-                    end = mid - 1;
-                }
-
             }
         }
-        return -1;
-
-
+        return false;
     }
 
     public static void main(String[] args) {
-        ArrayList<Integer> arr = new ArrayList<Integer>(Arrays.asList(3,2,1,9,7,5,4));
-        System.out.println(search(arr,9,3));
+        int[] arr = {7, 8, 1, 2, 3, 3, 3, 4, 5, 6};
+        int k = 3;
+        boolean ans = searchInARotatedSortedArrayII(arr, k);
+        if (ans == false)
+            System.out.println("Target is not present.");
+        else
+            System.out.println("Target is present in the array.");
     }
-
 }
