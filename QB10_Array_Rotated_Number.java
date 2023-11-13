@@ -1,0 +1,39 @@
+package Searching;
+
+public class QB10_Array_Rotated_Number {
+
+    public static int findMin(int[] arr) {
+        int n = arr.length;
+        int start = 0;
+        int end = n - 1;
+        int ans = Integer.MAX_VALUE;
+
+        while (start <= end) {
+
+            int mid = start + (end - start) / 2;
+            if (arr[start] <= arr[end]) {
+                ans = Math.min(ans, arr[start]);
+                break;
+            }
+
+            // left half sorted
+            if (arr[start] <= arr[mid]) {
+                ans = Math.min(ans, arr[start]);
+                start = mid + 1;
+
+
+            } else {
+                ans = Math.min(ans, arr[mid]);
+                end = mid -1;
+
+            }
+
+
+        }
+        for (int i =0;i<arr.length;i++){
+            if(arr[i]==ans);
+            return ans;
+        }
+        return ans;
+    }
+}
