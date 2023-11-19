@@ -3,28 +3,30 @@ import java.util.*;
 public class QB13_sq_root {
 
 
+    public static int sqrtN(long N) {
+        long start = 0;
+        long end = N ;
 
-        public static int floorSqrt(int n) {
-            int low = 1, high = n;
-            //Binary search on the answers:
-            while (low <= high) {
-                long mid = (low + high) / 2;
-                long val = mid * mid;
-                if (val <= (long)(n)) {
-                    //eliminate the left half:
-                    low = (int)(mid + 1);
-                } else {
-                    //eliminate the right half:
-                    high = (int)(mid - 1);
-                }
+        while (start <= end) {
+
+            long mid = start + (end - start) / 2;
+
+            if (mid * mid <= N) {
+               start = mid +1;
+
             }
-            return high;
-        }
+            else{
+                end = mid -1;
+            }
 
-        public static void main(String[] args) {
-            int n = 28;
-            int ans = floorSqrt(n);
-            System.out.println("The floor of square root of " + n + " is: " + ans);
         }
+        return (int) end ;
+
     }
 
+    public static void main(String[] args) {
+        System.out.println(sqrtN(15));
+    }
+
+
+}
