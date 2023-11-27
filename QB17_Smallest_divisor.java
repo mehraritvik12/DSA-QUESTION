@@ -3,26 +3,36 @@ package Searching;
 public class QB17_Smallest_divisor {
 
     public static int smallestDivisor(int arr[], int limit) {
-        int start =0;
-        int end = limit;
+
+        int n = arr.length; //size of array.
+        if(n > limit)
+        {
+            return -1;
+        }
+        //Find the maximum element:
+        int maxi = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            maxi = Math.max(maxi, arr[i]);
+        }
+
+
+
+        int start =1;
+        int end = maxi;
 
 
         while(start<=end)
         {
-            int mid = start +( end-start)/2;
-            if (givesum(arr, mid)==limit){
-                return mid;
+            int mid = start +(end-start)/2;
 
-            }
-
-            if (givesum(arr, mid)<limit){
+            if (givesum(arr, mid)<=limit){
                 end = mid-1;
 
 
         }
                 else{
 
-                end = mid-1;
+              
                 start = mid +1;
         }
 
