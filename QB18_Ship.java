@@ -5,18 +5,19 @@ import java.util.ArrayList;
 public class QB18_Ship {
 
     public static int leastWeightCapacity(int[] weights, int d) {
-//        int start = 1;
-//        int sum = 0;
-//        for (int i = 0; i < weights.length; i++) {
-//            sum = sum + weights[i];
-//        }
-//        int end = sum;
-
-        int start = Integer.MIN_VALUE, end = 0;
+        int start = Integer.MIN_VALUE;
+        int sum = 0;
         for (int i = 0; i < weights.length; i++) {
-            end += weights[i];
+            sum = sum + weights[i];
             start = Math.max(start, weights[i]);
         }
+        int end = sum;
+
+//        int start = Integer.MIN_VALUE, end = 0;
+//        for (int i = 0; i < weights.length; i++) {
+//            end += weights[i];
+//            start = Math.max(start, weights[i]);
+//        }
 
 
         while (start <= end) {
